@@ -16,7 +16,7 @@ export const STORY_RULES: readonly SocialStoryRule[] = [
   {
     rule: "Positive tone",
     meaning:
-      "Social Stories should be written in a positive and patient tone. Avoid harsh commands or blaming language. This means the story should avoid using words such as \"must\", \"should\", \"don't\", or \"forbidden\".",
+      "Social Stories should be written in a positive and patient tone. Avoid harsh commands or judgemental language. This means the story should avoid using words such as bad/naughty, should/shouldn’t, must, don't, can’t/won’t.",
     correct: "Sometimes I feel upset. That is okay.",
     incorrect: "Don't be bad.",
   },
