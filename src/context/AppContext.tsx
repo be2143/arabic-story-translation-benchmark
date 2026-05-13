@@ -15,6 +15,7 @@ export type AppPhase =
   | "education"
   | "quiz"
   | "dialect"
+  | "translation_example"
   | "workspace"
   | "completion";
 
@@ -82,6 +83,7 @@ const PHASE_VALUES: AppPhase[] = [
   "education",
   "quiz",
   "dialect",
+  "translation_example",
   "workspace",
   "completion",
 ];

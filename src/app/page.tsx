@@ -6,6 +6,7 @@ import IntroScreen from "@/screens/IntroScreen";
 import EducationScreen from "@/screens/EducationScreen";
 import QuizScreen from "@/screens/QuizScreen";
 import DialectScreen from "@/screens/DialectScreen";
+import TranslationExampleScreen from "@/screens/TranslationExampleScreen";
 import WorkspaceScreen from "@/screens/WorkspaceScreen";
 import CompletionScreen from "@/screens/CompletionScreen";
 
@@ -23,6 +24,8 @@ function PhaseRouter() {
       return <QuizScreen />;
     case "dialect":
       return <DialectScreen />;
+    case "translation_example":
+      return <TranslationExampleScreen />;
     case "workspace":
       return <WorkspaceScreen />;
     case "completion":

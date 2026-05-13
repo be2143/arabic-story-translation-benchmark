@@ -4,13 +4,15 @@ import type { TranslationDialect } from "../context/AppContext";
 import { DIALECT_OPTIONS } from "../data/dialects";
 
 export default function DialectScreen() {
-  const { setPhase, setSelectedDialect } = useApp();
-  const [choice, setChoice] = useState<TranslationDialect | null>(null);
+  const { setPhase, setSelectedDialect, state } = useApp();
+  const [choice, setChoice] = useState<TranslationDialect | null>(
+    () => state.selectedDialect
+  );
 
   const handleContinue = () => {
     if (!choice) return;
     setSelectedDialect(choice);
-    setPhase("workspace");
+    setPhase("translation_example");
   };
 
   return (
@@ -66,7 +68,7 @@ export default function DialectScreen() {
           disabled={!choice}
           className="mt-8 w-full rounded-md bg-neutral-900 py-3 text-sm font-medium text-white hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-40"
         >
-          Continue to translation
+          Continue to example
         </button>
       </div>
     </div>
