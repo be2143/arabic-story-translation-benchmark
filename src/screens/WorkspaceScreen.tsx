@@ -21,6 +21,7 @@ export default function WorkspaceScreen() {
   const [storyStorageReady, setStoryStorageReady] = useState(false);
   const [showSubmitConfirm, setShowSubmitConfirm] = useState(false);
   const [showGuideModal, setShowGuideModal] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   useEffect(() => {
     queueMicrotask(() => {
@@ -77,6 +78,20 @@ export default function WorkspaceScreen() {
   };
 
   const handleSubmit = async () => {
+    const allStoriesComplete = stories.every((story) =>
+      isStoryTranslationComplete(
+        getStoryTranslationEntry(state.translations, story.id)
+      )
+    );
+
+    if (!allStoriesComplete) {
+      setValidationError(
+        "Please complete the translated title and story body for all stories before submitting."
+      );
+      return;
+    }
+
+    setValidationError(null);
     await submitTranslations();
   };
 
@@ -366,6 +381,12 @@ export default function WorkspaceScreen() {
                   ? "story is still missing a translated title or body."
                   : "stories are still missing a translated title or body."}{" "}
                 You can still submit if you are finished.
+              </p>
+            ) : null}
+
+            {validationError ? (
+              <p className="mt-4 rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
+                {validationError}
               </p>
             ) : null}
 
