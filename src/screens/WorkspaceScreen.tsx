@@ -56,6 +56,11 @@ export default function WorkspaceScreen() {
     isStoryTranslationComplete(t)
   ).length;
   const incompleteCount = stories.length - completedCount;
+  const allStoriesComplete = stories.every((story) =>
+    isStoryTranslationComplete(
+      getStoryTranslationEntry(state.translations, story.id)
+    )
+  );
 
   const handleStoryChange = useCallback((storyId: number) => {
     setCurrentStoryId(storyId);
@@ -78,12 +83,6 @@ export default function WorkspaceScreen() {
   };
 
   const handleSubmit = async () => {
-    const allStoriesComplete = stories.every((story) =>
-      isStoryTranslationComplete(
-        getStoryTranslationEntry(state.translations, story.id)
-      )
-    );
-
     if (!allStoriesComplete) {
       setValidationError(
         "Please complete the translated title and story body for all stories before submitting."
@@ -160,10 +159,10 @@ export default function WorkspaceScreen() {
           <button
             type="button"
             onClick={() => setShowSubmitConfirm(true)}
-            disabled={isSubmitting}
-            className="w-full rounded-md bg-neutral-900 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 disabled:opacity-50"
+              disabled={isSubmitting || !allStoriesComplete}
+              className="w-full rounded-md bg-neutral-900 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 disabled:opacity-50"
           >
-            {isSubmitting ? "Submitting…" : "Submit all"}
+              {isSubmitting ? "Submitting…" : !allStoriesComplete ? "Complete all to submit" : "Submit all"}
           </button>
         </div>
       </aside>
@@ -185,7 +184,7 @@ export default function WorkspaceScreen() {
             <button
               type="button"
               onClick={() => setShowGuideModal(true)}
-              className="rounded border border-neutral-300 bg-white px-3 py-1.5 text-sm text-neutral-800 hover:bg-neutral-50"
+              className="rounded border border-purple-600 bg-purple-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-purple-700"
             >
               Rules &amp; checklist
             </button>
@@ -272,10 +271,14 @@ export default function WorkspaceScreen() {
           <button
             type="button"
             onClick={() => setShowSubmitConfirm(true)}
-            disabled={isSubmitting}
+            disabled={isSubmitting || !allStoriesComplete}
             className="w-full rounded-md bg-neutral-900 py-3 text-sm font-medium text-white hover:bg-neutral-800 disabled:opacity-50"
           >
-            {isSubmitting ? "Submitting…" : "Submit all translations"}
+            {isSubmitting
+              ? "Submitting…"
+              : !allStoriesComplete
+                ? "Complete all to submit"
+                : "Submit all translations"}
           </button>
         </div>
       </div>
@@ -380,7 +383,7 @@ export default function WorkspaceScreen() {
                 {incompleteCount === 1
                   ? "story is still missing a translated title or body."
                   : "stories are still missing a translated title or body."}{" "}
-                You can still submit if you are finished.
+                Complete the remaining translations to enable submission.
               </p>
             ) : null}
 
@@ -400,7 +403,7 @@ export default function WorkspaceScreen() {
               <button
                 type="button"
                 onClick={handleSubmit}
-                disabled={isSubmitting}
+                disabled={isSubmitting || !allStoriesComplete}
                 className="rounded-md bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 disabled:opacity-50"
               >
                 {isSubmitting ? "Submitting…" : "Yes, submit"}
