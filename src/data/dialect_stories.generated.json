@@ -1,0 +1,104 @@
+{
+  "base_stories": [
+    {
+      "base_story_id": "B1",
+      "source_id": "seed_story_108",
+      "title": "It’s Safe to Sit on a Toilet",
+      "category": "Social Rules",
+      "situation": "The child learns that sitting on a toilet is safe and uses the toilet seat appropriately for pee and poop.",
+      "story_content": "It is safe for a child or adult to sit on a toilet.\nThat’s good to know, because many people need to use toilets each day.\nThe toilet seat is small enough to sit safely, with a hole that is big enough for pee or poop to pass through.\nA toilet seat is a safe place to sit, pee, and poop."
+    },
+    {
+      "base_story_id": "B2",
+      "source_id": "seed_story_133",
+      "title": "Mistakes Can Happen on a Good Day",
+      "category": "Relationship_2",
+      "situation": "The child understands that mistakes are normal, asks adults for help to fix mistakes, and uses coping language to stay calm.",
+      "story_content": "I am learning that mistakes can happen on a good day.\nEach day, many people make mistakes as they work and play. For example, they may forget their lunch, accidentally trip while going up steps, or dial a phone number incorrectly. There are more than a million other mistakes that people can make, too!\nAs people grow, they learn about mistakes. They learn that making a mistake is okay. A mistake is a mistake, and it’s still a good day.\nMost mistakes can be fixed. When I make a mistake, adults like my mom, dad, or teacher may be very helpful. They were children once and made a lot of mistakes. They may have made a mistake like the one I am trying to fix!\nThere’s a lot of time in a day—24 hours, or 1,440 minutes, or 86,400 seconds to be exact. Usually, mistakes happen quickly. That leaves plenty of time to fix mistakes, and for other parts of the day to go well.\nI am learning that mistakes can happen on a good day."
+    },
+    {
+      "base_story_id": "B3",
+      "source_id": "seed_story_162",
+      "title": "It’s Okay to Feel Sad, but Feeling Happy Is Better",
+      "category": "Relationship_1",
+      "situation": "The child recognizes feelings of sadness and practices safe, practical ways to feel better with support from trusted adults.",
+      "story_content": "Sad is an unhappy and uncomfortable feeling. It’s okay to feel sad. All people feel sad sometimes. People may cry when they feel sad. When a person feels sad, it’s important to find a way to feel better.\nBrooke had an ice cream cone. Some of her ice cream fell in the dirt. She felt sad, and cried.\nConnor had a problem. He left his stuffed monkey, Elroy, at his friend Luke’s house. He felt sad.\nAaron’s cat, Orson, ran away. Aaron and his family love Orson. They all felt sad.\nWhen people feel sad, they try to look for a way to feel better.\nSometimes, people feel better when they see that all isn’t lost. Brooke still had the cone in her hand, and there was some ice cream in there, too. She ate that and began to feel happier.\nSometimes, telling someone else about a problem helps. Connor told his mom that his stuffed monkey Elroy was at his friend Luke’s house. Connor’s mom helped Connor get Elroy. Connor was so happy to see Elroy again!\nSometimes, working with others can help. Aaron’s family looked for Orson right away. They found him under the back porch. They were all very happy to find Orson!\nSad is an uncomfortable feeling. It’s okay for people to feel sad. When people feel sad they try to find a way to be happy again. That’s Life on Planet Earth."
+    }
+  ],
+  "dialects": [
+    "MSA",
+    "Levantine",
+    "Egyptian",
+    "Gulf"
+  ],
+  "conditions": [
+    "clean_target",
+    "mild_mixing",
+    "clear_non_target_mix"
+  ],
+  "cases": [
+    {
+      "case_id": "CXOY9ZRK",
+      "base_story_id": "B3",
+      "target_dialect": "Egyptian",
+      "story_text": "الحزن شعور مش مريح، وعادي إننا نحس بيه أحياناً لأن كل الناس بتمر بلحظات حزينة. لما آيس كريم بروك وقع في الأرض، عيطت وكانت زعلانة، بس لما لقت لسه فيه حتة في البسكوتة بدأت تفرح تاني. كونور نسي لعبته عند صاحبه وكان متضايق، بس لما حكى لمامته ساعدته يرجعها وبقى مبسوط جداً. أما عائلة آرون فكانوا حزنانين عشان قطتهم ضاعت، لكنهم تعاونوا مع بعض لحد ما لقوها تحت البيت. من الضروري أن يبحث الإنسان عن حلول لما يكون حزين عشان يرجع يحس بالسعادة. أحياناً الكلام مع حد بنحبه أو المحاولة من جديد بتخلينا أحسن بكتير. دي سنة الحياة على كوكب الأرض، إننا نحاول نلاقي الفرحة بعد الزعل."
+    },
+    {
+      "case_id": "CWLNFUL7",
+      "base_story_id": "B2",
+      "target_dialect": "Gulf",
+      "story_text": "أنا قاعد أتعلم إن الغلطات ممكن تصير حتى في اليوم الزين. كل يوم وايد ناس يغلطون وهم يلعبون، يعني عادي الواحد ينسى غداه أو يطيح وهو يمشي. بس يا زلمة لازم تعرف إن الغلط مش نهاية العالم والدنيا لسه بخير. لما أغلط، أقدر أروح حق أبوي أو المعلمة عشان يساعدوني أصلح اللي صار. هما كمان كانوا أطفال وعملوا غلطات كتير زيي بالظبط ومحدش زعل منهم. اليوم فيه ساعات وايد، والغلطة تاخذ ثواني بس، يعني لسه فيه وقت ننبسط ونروق. أنا الحين فاهم إن الغلط شي طبيعي وما يخرب يومي الحلو أبداً."    },
+    {
+      "case_id": "CFZY4QOZ",
+      "base_story_id": "B2",
+      "target_dialect": "Egyptian",
+      
+      "story_text": "أنا بتعلم إن الغلطات ممكن تحصل عادي في يوم جميل. كل يوم، ناس كتير بتغلط وهي بتلعب أو بتشتغل، زي مثلاً لما حد ينسى غداه أو يتكعبل وهو طالع السلم. ومع الوقت، الواحد بيعرف إن الغلط ده شيء طبيعي ومش بيبوظ اليوم خالص. أغلب الغلطات ليها حل، ولما بغلط بروح لماما أو المدرس بتاعي عشان يساعدوني. هما كمان كانوا أطفال زمان وغلطوا كتير، وأكيد مروا بنفس اللي أنا بمر بيه دلوقتي. اليوم فيه ساعات كتير أوي، والغلطة مش بتاخد غير ثواني بسيطة. وعلاوة على ذلك، لسه بيفضل وقت كبير عشان نصلح اللي حصل ونتبسط بباقي اليوم. أنا بتعلم إن الغلطات جزء من يومنا ومش بتمنع إنه يكون يوم سعيد."    },
+    {
+      "case_id": "CWZTP5LU",
+      "base_story_id": "B2",
+      "target_dialect": "Egyptian",
+      
+      "story_text": "أنا بتعلم إن الغلطات ممكن تحصل عادي في يوم حلو. كل يوم ناس كتير بتغلط وهي بتلعب أو بتشتغل، زي مثلاً لما حد ينسى غداه أو يتكعبل وهو طالع السلم. لما بنكبر بنفهم إن الغلط ده حاجة طبيعية ومش بيبوظ اليوم. أغلب الغلطات ينفع تتصلح، وممكن أطلب مساعدة من بابا أو ماما أو مدرستي عشان هما كمان غلطوا قبل كده. اليوم فيه ساعات ودقايق كتير أوي، والغلطة بتحصل في ثانية واحدة بس. ده معناه إن لسه فيه وقت كبير نصلح فيه اللي حصل ونتبسط بباقي يومنا. أنا اتعلمت إن الغلطة مش نهاية العالم واليوم بيفضل جميل."    },
+    {
+      "case_id": "CIC0O4GR",
+      "base_story_id": "B1",
+      "target_dialect": "MSA",
+      "story_text": "من الآمن جداً للطفل أو الكبير إنه يقعد على التواليت. دي حاجة كويسة خالص عشان ناس كتير بيحتاجوا يستخدموا الحمام كل يوم. قاعدة الحمام حجمها مناسب عشان تجلس بأمان، وفيها فتحة كافية عشان البول والبراز يمروا منها. الحين لازم تعرف إن المقعد ده مكان آمن ومريح وايد. مفيش داعي للخوف أبداً وأنت جالس هناك. قاعدة التواليت هي المكان الصح عشان تسوي بيبي وتخلص شغلك بسلام. الحين أنت صرت شاطر وتعرف إن القعدة دي مريحة وما فيها أي خطر."    },
+    {
+      "case_id": "CO559UJI",
+      "base_story_id": "B3",
+      "target_dialect": "Levantine",
+      "story_text": "الزعل شعور مش مريح، وعادي الواحد يحس فيه لأن كل الناس بتزعل أوقات. لما ليلى وقعت البوظة تبعتها على الأرض زعلت وبكيت، بس لما شافت إنه لسه في شوي بالبسكوتة أكلتهم وفرحت. وعمر نسي لعبته المفضلة عند صاحبه وحس بحزن، بس لما حكى لماما ساعدته يرجعها وصار مبسوط كتير. وكمان عيلة سامر زعلوا لما ضاعت قطتهم، بس تعاونوا مع بعض ودوروا عليها لحد ما لقوها تحت الدرج. لما نحس بالزعل، كتير منيح نحكي مع حدا كبير بنحبه عشان يساعدنا نلاقي طريقة نتحسن. المهم نعرف إنه الزعل بيمرق، وبنقدر نرجع نضحك ونفرح من جديد. هيك هي الحياة، يوم زعل ويوم فرح."    },
+    {
+      "case_id": "C5TP4ZS7",
+      "base_story_id": "B1",
+      "target_dialect": "Egyptian",
+      "story_text": "عادي جداً إن الطفل أو الكبير يقعد على التواليت بأمان. دي معلومة مفيدة ومهمة لأن كل الناس بيحتاجوا يستخدموا الحمام كل يوم. قاعدة التواليت حجمها مناسب عشان تقعد عليها من غير خوف. الفتحة اللي فيها معمولة مخصوص عشان البول والبراز ينزلوا فيها بسهولة. ومن الجدير بالذكر إن القعدة دي مريحة ومصممة عشان تحميك. التواليت مكان آمن ونضيف عشان تعمل فيه حمام براحتك. مفيش أي داعي للقلق وأنت بتستخدمه كل مرة."    },
+    {
+      "case_id": "CFA8KDBR",
+      "base_story_id": "B3",
+      "target_dialect": "Egyptian",
+      "story_text": "الزعل شعور مش مريح بس عادي إننا نزعل ساعات عشان كل الناس بتمر بكده. البنت بروك وقعت الأيس كريم بتاعها على الأرض وعيطت كتير عشان كانت زعلانة وايد. والولد كونور نسى اللعبة بتاعته عند صاحبه وقال لمامته «بدي ياها هالحين» عشان يرجع يتبسط تاني. أما آرون فكانت قطته ضايعة بس العيلة كلها دورت معاه ولقوها تحت البيت. لما بنكون متضايقين لازم نحكي للي بنحبهم عشان نلاقي حل ونحس بالسعادة. أحياناً الواحد بيشوف إن لسه فيه حاجات حلوة باقية زي بروك اللي لسه معاها البسكوتة. الحزن بيعدي والمهم إننا نحاول نرجع نضحك تاني. هيدي هي الحياة على كوكب الأرض ولازم نكون صبورين."    },
+    {
+      "case_id": "CSK83026",
+      "base_story_id": "B1",
+      "target_dialect": "Levantine",
+      "story_text": "من الطبيعي والآمن إنه الطفل أو الشخص الكبير يقعد على بيت الراحة. هاد شي كتير منيح، لأنه كل الناس بيحتاجوا يستخدموا الحمام كل يوم. قاعدة الحمام حجمها مناسب ومريحة للقعدة، وفيها فتحة بتسمح بمرور البول والبراز بسلامة. المقعد مصمم بطريقة تضمن الأمان التام للطفل وما في داعي للخوف أبداً. الجلوس على الحمام هو الطريقة الصح لحتى الواحد يقضي حاجته بنظافة. فعلاً، مقعد الحمام مكان آمن ومناسب للتبول والتبرز بكل راحة."    },
+    {
+      "case_id": "CQ8X1B5I",
+      "base_story_id": "B3",
+      "target_dialect": "Levantine",
+      "story_text": "الحزن شعور مش مريح بس عادي الواحد يزعل، كل الناس بتمر بهيك أوقات وممكن تعيط. بروك وقعت البوظة تبعتها على الأرض وزعلت كتير، بس شافت إنه لسه في شوية بالبسكوتة وأكلتهم وبلشت تروق. كونور نسي لعبته عند رفيقه لوك، راح حكى لمامته «يا واد يا كونور ما تزعلش» وساعدته يرجعها وصار مبسوط أوي. أما آرون فبسه «أورسن» ضاع، وكل العيلة كانت «وايد» حزينة عليه وقعدوا يدوروا بكل مكان. لما اشتغلوا مع بعض لقوه تحت الدرج وفرحوا كتير برجوع البس. لما نحس بالحزن لازم ندور على طريقة تخلينا نصير أحسن ونرجع نضحك. هيدي هي الحياة على كوكب الأرض، يوم زعلان ويوم «زي الفل»."    },
+    {
+      "case_id": "CHWBV17R",
+      "base_story_id": "B3",
+      "target_dialect": "Gulf",
+      "story_text": "الحزن شعور يضيق الصدر ومو مريح، وعادي الواحد يحس فيه لأن كل الناس تمر بهاللحظات. أحياناً الواحد يبكي إذا تضايق، بس المهم إنه يحاول يدور طريقة تخليه يستانس. نورة طاح الآيس كريم حقها على الأرض وزعلت وبكت، بس لما شافت إنه باقي شوي بالبسكوت أكلته وضحكت. وحمد نسى لعبته المفضلة عند رفيقه وضاق خلقه، بس لما علم أمه ساعدته يروح يجيبها وطار من الوناسة. وعائلة فهد ضاع قطوهم وكانوا حزينين، لكنهم تعاونوا ولقوه تحت الدرج وفرحوا وايد. إن الشعور بالحزن أمرٌ طبيعي في حياة البشر، لكننا دائماً نحاول نرجع نبتسم. هذي هي الحياة على كوكب الأرض، يوم كذي ويوم كذا."    },
+    {
+      "case_id": "C1XZ38PD",
+      "base_story_id": "B1",
+      "target_dialect": "Levantine",
+      "story_text": "قعدة الحمام آمنة كتير للولاد وللكبار. هاد شي منيح نعرفه، لأنو كل الناس بيحتاجوا يستعملوا الحمام كل يوم. الغطا تبع الحمام حجمه مناسب ومنيح عشان نقعد عليه بأمان. في فتحة بالنص كبيرة كفاية عشان ينزل منها البول والبراز. قعدة الحمام مكان آمن ونضيف عشان نقعد ونعمل فيه (بيبي). ما في داعي نخاف أبداً وإحنا قاعدين. الحمام بيساعدنا نخلي جسمنا نضيف ومرتاح."    }
+  ]
+}

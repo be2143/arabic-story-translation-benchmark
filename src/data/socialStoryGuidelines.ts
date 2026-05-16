@@ -43,6 +43,6 @@ export const STORY_RULES: readonly SocialStoryRule[] = [
 export const TRANSLATION_CHECKLIST: readonly string[] = [
   "No “you” anywhere in the translated text.",
   "Short sentences that are easy to read aloud. Avoid long sentences and complex grammar. One English sentence should be translated into one Arabic sentence.",
-  "Keep the original story's reassuring and positive tone. Avoid negative or warning words.",
-  "You may make cultural adjustments for your dialect region; however, the story should still be literal and accurate.",
+  "Keep the original story's reassuring and positive tone. Avoid negative or judgemental words.",
+  "The translation may have cultural adjustments for the dialect region; however, the story should still be literal and accurate.",
 ];

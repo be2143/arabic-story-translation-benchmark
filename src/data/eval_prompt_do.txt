@@ -1,0 +1,68 @@
+PROMPT 1 — DESCRIPTIVE ORIENTATION (DO)	
+System / context: You are an expert evaluator of Social Stories written for children with ASD. You will be given a story and asked to perform a specific counting and classification task. Follow the rules exactly and return only valid JSON.
+Task: Step through every sentence in the story, classify each one using the sentence type definitions below, then calculate the ratio and determine a pass/fail result. Show your work in the sentence_log field.
+
+Sentence definition (apply in order):
+
+1. Primary rule: any text ending in ".", "!", "?", or "..."
+2. Fallback rule: if a stretch of text does not end in one of those characters, treat each line break as a sentence boundary.
+
+Additional rules:
+• Do NOT count the story title as a sentence.
+• Do NOT count list items or fragments — a countable sentence must express a complete idea.
+• If a sentence is repeated verbatim, count it each time it appears.
+• Partial sentences (sentences with deliberate missing words, e.g. "When I feel sad I can...") are not coaching sentences — classify them as D.
+• When in doubt, treat each line break as a sentence boundary.
+
+Coaching (C) — classify as C (3 sub-types):
+Coaching sentences describe or suggest responses. There are three sub-types — classify as C if the sentence fits ANY of the following:
+i. Sentences that describe or suggest responses for the child (e.g., 'I will try to put my hand up when I want to speak to my teacher in class.')
+ii. Sentences that describe or suggest responses for the caregiver or teacher (e.g., 'Mrs X can help me to use the soap when I am washing my hands.')
+iii. Sentences developed by or attributed to the child themselves (e.g., 'I can draw in my special drawing book when I am feeling sad.')
+
+Descriptive (D) — classify as D (3 sub-types + Partial):
+Note: 'Descriptive' here refers collectively to Carol Gray’s three describing sentence types plus Partial sentences. All four count toward the describing side of the GR-EIGHT ratio.
+
+1. Descriptive sentences — describe facts about the situation in a clear and objective way, free of opinions or assumptions. They can share information that 'everybody knows' but that may not be obvious to an autistic child. (e.g., 'Adults and children wash to keep clean and smell fresh.' / 'Everyone needs to see a doctor from time to time.')
+2. Perspective sentences — describe the thoughts, feelings, or beliefs of people. Particularly helpful for autistic children who may find it difficult to understand that others have different thoughts and feelings. (e.g., 'Many people enjoy going to the cinema.' / 'When I try my best my mum feels very proud of me.')
+3. Affirmative sentences — positive phrases that enhance the meaning of another sentence or reinforce a key point. (e.g., 'This is okay.' / 'This is very important.' / 'That will be good.')
+4. Partial sentences — sentences with deliberate missing words used to check the child’s understanding or invite their input. Not coaching sentences. (e.g., 'When I feel sad I can...' / 'Dad will be...')
+
+Tiebreaker rule: If a sentence contains both a descriptive and a coaching element, classify by primary function: C if it directs the child toward an action or strategy, D otherwise.
+Uncertainty fallback: If you are genuinely uncertain how to classify a sentence, classify it as D (Descriptive).
+
+Pass / Fail rule:
+• If coaching_count > 0:
+numeric_ratio = descriptive_count / coaching_count
+numeric_ratio ≥ 2 -> result = "pass"
+numeric_ratio < 2 -> result = "fail"
+• If coaching_count = 0 AND descriptive_count ≥ 1:
+result = "pass", numeric_ratio = null
+• If both counts = 0:
+result = "fail", numeric_ratio = null
+
+Story to evaluate: [INSERT STORY TEXT HERE]
+
+Required JSON output (return nothing else):
+{
+"story_id": "[INSERT ID]",
+"descriptive_orientation": {
+"sentence_log": [
+{ "text": "sentence text here", "classification": "D", "reasoning": "brief justification here" },
+{ "text": "sentence text here", "classification": "C", "reasoning": "brief justification here" }
+],
+"descriptive_count": 0,
+"coaching_count": 0,
+"numeric_ratio": null,
+"result": "pass"
+}
+}
+
+Field notes:
+• sentence_log must contain one entry per counted sentence in the order they appear.
+• classification must be exactly "D" or "C".
+• reasoning: 1 short sentence explaining why you assigned that classification. Required for every entry.
+• descriptive_count and coaching_count must equal the number of D and C entries in sentence_log respectively.
+• numeric_ratio = descriptive_count / coaching_count when coaching_count > 0; otherwise null.
+• result must be exactly "pass" or "fail".
+• Do not add extra keys.

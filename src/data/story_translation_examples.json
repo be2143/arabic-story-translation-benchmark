@@ -1,23 +1,51 @@
 [
   {
     "story_title": "How to Open a Gift",
-    "story_content": "Sometimes people give me gifts. I am learning what to think, say, and do when I get a gift.\n\nIt takes time and sometimes money to find and wrap a gift. For this reason, it’s thoughtful to say “thank you” right when I get a gift (even before I open it). This means, Thank you for thinking of me, and for getting this gift ready to give to me.\nIt may be okay to open a gift right away. Or, it may be important to wait until later to open a gift.\nAfter I open a gift, it’s important to say “thank you.”\n\nI am learning what to think, say, and do when I get a gift. When I get a gift, I will try to practice!",
+    "story_content": "Sometimes people give me gifts. I am learning what to think, say, and do when I get a gift.\n\nIt takes time and sometimes money to find and wrap a gift. For this reason, it's thoughtful to say \"thank you\" right when I get a gift (even before I open it). This means, Thank you for thinking of me, and for getting this gift ready to give to me.\nIt may be okay to open a gift right away. Or, it may be important to wait until later to open a gift.\nAfter I open a gift, it's important to say \"thank you.\"\n\nI am learning what to think, say, and do when I get a gift. When I get a gift, I will try to practice!",
     "translations": {
       "msa": {
         "title": "كيفية فتح هدية",
-        "content": "أحيانًا يقدم لي الناس هدايا. أنا أتعلم ماذا أفكر، وماذا أقول، وماذا أفعل عندما أحصل على هدية.\n\nيستغرق العثور على هدية وتغليفها وقتًا، وأحيانًا مالًا. لذلك، من اللطيف أن أقول «شكرًا لك» فور حصولي على الهدية (حتى قبل أن أفتحها). وهذا يعني: شكرًا لك لأنك فكرت بي، ولأنك جهزت هذه الهدية لتقدمها لي.\nقد يكون من المناسب أن أفتح الهدية فورًا، أو قد يكون من المهم أن أنتظر حتى وقت لاحق لفتحها.\nبعد أن أفتح الهدية، من المهم أن أقول «شكرًا لك».\n\nأنا أتعلم ماذا أفكر، وماذا أقول، وماذا أفعل عندما أحصل على هدية. وعندما أحصل على هدية، سأحاول أن أتدرّب!"
+        "content": "أحيانًا يقدم لي الناس هدايا. أنا أتعلم ماذا أفكر، وماذا أقول، وماذا أفعل عندما أحصل على هدية.\n\nيستغرق العثور على هدية وتغليفها وقتًا، وأحيانًا مالًا. لذلك، من اللطيف أن أقول «شكرًا لك» فور حصولي على الهدية (حتى قبل أن أفتحها). وهذا يعني: شكرًا لك لأنك فكرت بي، ولأنك جهزت هذه الهدية لتقدمها لي.\nقد يكون من المناسب أن أفتح الهدية فورًا، أو قد يكون من المهم أن أنتظر حتى وقت لاحق لفتحها.\nبعد أن أفتح الهدية، من المهم أن أقول «شكرًا لك».\n\nأنا أتعلم ماذا أفكر، وماذا أقول، وماذا أفعل عندما أحصل على هدية. وعندما أحصل على هدية، سأحاول أن أتدرّب!",
+        "content_bad": "أحيانًا يعطيني الناس هدايا وأنا أتعلم ماذا أفعل عندما أحصل عليها.\n\nيستغرق العثور على هدية وقتًا ومالًا لذلك أقول شكرًا لك.\nيمكنني فتح الهدية الآن أو لاحقًا وبعدها أقول شكرًا.\n\nسأحاول أن أتدرّب عندما أحصل على هدية.",
+        "bad_reasons": [
+          "Sentence skipping: the explanation of why saying thank you matters is removed.",
+          "Merged sentences: multiple ideas are compressed into one, which reduces clarity.",
+          "Lost nuance: important details like politeness reasoning and sequencing are simplified or omitted.",
+          "Repetition removed incorrectly: the learning emphasis at the end is weakened."
+        ]
       },
       "egypt": {
         "title": "إزاي نفتح هدية",
-        "content": "أحيانًا الناس بيقدّموا لي هدايا. أنا بتعلم أفكر وأقول وأتصرف إزاي لما أستلم هدية.\n\nبياخد وقت وأحيانًا فلوس عشان نلاقي الهدية ونغلفها. عشان كده، من اللطيف إننا نقول «شكرًا» أول ما أستلم الهدية (حتى قبل ما أفتحها). وده معناه: شكرًا لأنك فكرت فيّ، وإنك جهّزت الهدية دي علشان تديها لي.\n\nممكن يكون عادي أفتح الهدية على طول، وممكن يكون مهم إني أستنى لحد وقت تاني عشان أفتحها.\n\nبعد ما أفتح الهدية، مهم برضه أقول «شكرًا».\n\nأنا بتعلم أفكر وأقول وأتصرف إزاي لما أستلم هدية. لما أستلم هدية، هحاول أتمرّن على كده!"
+        "content": "أحيانًا الناس بيقدّموا لي هدايا. أنا بتعلم أفكر وأقول وأتصرف إزاي لما أستلم هدية.\n\nبياخد وقت وأحيانًا فلوس عشان نلاقي الهدية ونغلفها. عشان كده، من اللطيف إننا نقول «شكرًا» أول ما أستلم الهدية (حتى قبل ما أفتحها). وده معناه: شكرًا لأنك فكرت فيّ، وإنك جهّزت الهدية دي علشان تديها لي.\n\nممكن يكون عادي أفتح الهدية على طول، وممكن يكون مهم إني أستنى لحد وقت تاني عشان أفتحها.\n\nبعد ما أفتح الهدية، مهم برضه أقول «شكرًا».\n\nأنا بتعلم أفكر وأقول وأتصرف إزاي لما أستلم هدية. لما أستلم هدية، هحاول أتمرّن على كده!",
+        "content_bad": "أحيانًا الناس بتديني هدايا وأنا بتعلم أتصرف إزاي.\n\nبياخد وقت وفلوس عشان نجيب هدية، فبقول شكرًا.\nممكن أفتحها دلوقتي أو بعدين وبعدين أقول شكرًا.\n\nهحاول أتمرن لما يجيني هدية.",
+        "bad_reasons": [
+          "Important explanations are removed (for example, why saying thank you matters).",
+          "Sentences are merged poorly so timing and action are combined unnaturally.",
+          "The tone is less polite and less expressive than the good version.",
+          "Repetition is simplified incorrectly, so the learning emphasis is weaker."
+        ]
       },
       "saudi": {
         "title": "كيف أفتح الهدية",
-        "content": "أحيانًا يعطيني الناس هدايا. وأنا أتعلم ماذا أفكر، وماذا أقول، وماذا أفعل عندما أحصل على هدية.\n\nيأخذ العثور على الهدية وتغليفها وقتًا، وأحيانًا مالًا. لهذا من اللطيف أن أقول «شكرًا» مباشرة عندما أحصل على الهدية (حتى قبل أن أفتحها). وهذا يعني: شكرًا لأنك فكرت فيني، وجهزت هذه الهدية عشان تعطيني إياها.\n\nممكن أحيانًا أفتح الهدية فورًا. وممكن أحيانًا يكون مهم أنتظر وأفتحها لاحقًا.\n\nبعد ما أفتح الهدية، مهم أقول «شكرًا».\n\nأنا أتعلم ماذا أفكر، وماذا أقول، وماذا أفعل عندما أحصل على هدية. وإذا حصلت على هدية، بحاول أتمرّن على هذا!"
+        "content": "أحيانًا يعطيني الناس هدايا. وأنا أتعلم ماذا أفكر، وماذا أقول، وماذا أفعل عندما أحصل على هدية.\n\nيأخذ العثور على الهدية وتغليفها وقتًا، وأحيانًا مالًا. لهذا من اللطيف أن أقول «شكرًا» مباشرة عندما أحصل على الهدية (حتى قبل أن أفتحها). وهذا يعني: شكرًا لأنك فكرت فيني، وجهزت هذه الهدية عشان تعطيني إياها.\n\nممكن أحيانًا أفتح الهدية فورًا. وممكن أحيانًا يكون مهم أنتظر وأفتحها لاحقًا.\n\nبعد ما أفتح الهدية، مهم أقول «شكرًا».\n\nأنا أتعلم ماذا أفكر، وماذا أقول، وماذا أفعل عندما أحصل على هدية. وإذا حصلت على هدية، بحاول أتمرّن على هذا!",
+        "content_bad": "أحيانًا الناس يعطوني هدايا وأنا أتعلم أتصرف لما تجيني هدية.\n\nياخذ وقت وفلوس عشان الهدية، فـ أقول شكرًا.\nأفتحها الحين أو بعدين وبعدها أقول شكرًا.\n\nبحاول أتمرن إذا جتني هدية.",
+        "bad_reasons": [
+          "Key explanations are missing (for example, the meaning behind saying thank you).",
+          "Sentences compress unrelated steps into one line.",
+          "The flow sounds less natural in Saudi dialect.",
+          "The closing repetition and practice framing are reduced, so it feels less instructional."
+        ]
       },
       "lebanon": {
         "title": "كيف افتح هدية",
-        "content": "أوقات الناس بيعطوني هدايا. أنا عم اتعلّم شو لازم فكّر، قول، وإعمل لما استلم هدية.\n\nبياخد وقت وأحيانًا مصاري لحتى نلاقي ونغلف الهدية. كرمال هيك، من اللطيف قول \"شكراً\" فورًا لما استلم الهدية (حتى قبل ما أفتحها). يعني: شكراً لأنك فكّرت فيّي، وجهّزت هالهدية لحتى تعطيني ياها.\n\nممكن يكون عادي إني أفتح الهدية فورًا، وممكن كمان يكون مهم إني انطر لبعدين لحتى أفتحها.\n\nبعد ما أفتح الهدية، مهم قول \"شكراً\".\n\nأنا عم اتعلّم شو لازم فكّر، قول، وإعمل لما استلم هدية. لما تجيني هدية، رح حاول أتدرّب!"
+        "content": "أوقات الناس بيعطوني هدايا. أنا عم اتعلّم شو لازم فكّر، قول، وإعمل لما استلم هدية.\n\nبياخد وقت وأحيانًا مصاري لحتى نلاقي ونغلف الهدية. كرمال هيك، من اللطيف قول \"شكراً\" فورًا لما استلم الهدية (حتى قبل ما أفتحها). يعني: شكراً لأنك فكّرت فيّي، وجهّزت هالهدية لحتى تعطيني ياها.\n\nممكن يكون عادي إني أفتح الهدية فورًا، وممكن كمان يكون مهم إني انطر لبعدين لحتى أفتحها.\n\nبعد ما أفتح الهدية، مهم قول \"شكراً\".\n\nأنا عم اتعلّم شو لازم فكّر، قول، وإعمل لما استلم هدية. لما تجيني هدية، رح حاول أتدرّب!",
+        "content_bad": "أوقات الناس بيعطوني هدايا وأنا عم اتعلّم شو بعمل لما تجيني هدية.\n\nبياخد وقت ومصاري لنجيب هدية، فبقول شكراً.\nممكن افتحها هلّق أو بعدين وبعدين بقول شكراً.\n\nرح حاول أتدرّب لما تجيني هدية.",
+        "bad_reasons": [
+          "Important meaning is removed (there is no explanation of why to say thanks).",
+          "Ideas are merged unnaturally so timing and action are compressed.",
+          "The tone is less expressive and less patient than the good version.",
+          "Repetition is cut too much, which reduces the instructional feel."
+        ]
       }
     }
   }
