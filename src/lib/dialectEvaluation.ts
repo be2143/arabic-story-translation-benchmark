@@ -1,12 +1,18 @@
-import { dialectEvalCases } from "@/data/dialectEvalCases";
+import {
+  caseById,
+  getDialectEvalCases,
+} from "@/data/dialectEvalCases";
+import type { TranslationDialect } from "@/context/AppContext";
 import { computeDoResult } from "@/types/dialectEval";
 import type { Db } from "mongodb";
 
 export const DIALECT_EVAL_COLLECTION = "dialect_evaluation_submissions";
 
-const EXPECTED_CASE_IDS = new Set(dialectEvalCases.map((c) => c.case_id));
+const DIALECTS = ["MSA", "Saudi", "Egyptian", "Lebanese"] as const;
 
-const caseById = new Map(dialectEvalCases.map((c) => [c.case_id, c]));
+function isDialect(x: string): x is TranslationDialect {
+  return DIALECTS.includes(x as TranslationDialect);
+}
 
 function isScore(n: unknown): n is number {
   return typeof n === "number" && Number.isFinite(n) && n >= 1 && n <= 5;
@@ -48,7 +54,7 @@ export function parseStoryRating(row: unknown): Record<string, unknown> | null {
   if (typeof row !== "object" || row === null) return null;
   const r = row as Record<string, unknown>;
   const case_id = String(r.case_id ?? "").trim();
-  if (!EXPECTED_CASE_IDS.has(case_id)) return null;
+  if (!caseById.has(case_id)) return null;
 
   const doRow = r.descriptive_orientation;
   if (typeof doRow !== "object" || doRow === null) return null;
@@ -91,9 +97,14 @@ export function enrichStoryRating(rating: Record<string, unknown>): Record<strin
   if (!meta) return rating;
   return {
     ...rating,
+    story_id: meta.story_id,
+    model: meta.model,
+    task: meta.task,
     target_dialect: meta.target_dialect,
-    base_story_id: meta.base_story_id,
+    dialect_key: meta.dialect_key,
     story_index: meta.index,
+    english_title: meta.english_title,
+    source_file: meta.source_file,
   };
 }
 
@@ -101,6 +112,7 @@ export async function upsertStoryRating(
   db: Db,
   email: string,
   user_name: string,
+  target_dialect: TranslationDialect,
   rating: Record<string, unknown>
 ): Promise<void> {
   const col = db.collection(DIALECT_EVAL_COLLECTION);
@@ -119,7 +131,12 @@ export async function upsertStoryRating(
   await col.updateOne(
     { email },
     {
-      $set: { user_name, story_ratings, updated_at: now },
+      $set: {
+        user_name,
+        target_dialect,
+        story_ratings,
+        updated_at: now,
+      },
       $setOnInsert: { status: "in_progress", created_at: now },
     },
     { upsert: true }
@@ -130,6 +147,7 @@ export async function finalizeDialectEvaluation(
   db: Db,
   email: string,
   user_name: string,
+  target_dialect: TranslationDialect,
   story_ratings: Record<string, unknown>[]
 ): Promise<void> {
   const col = db.collection(DIALECT_EVAL_COLLECTION);
@@ -141,6 +159,7 @@ export async function finalizeDialectEvaluation(
       $set: {
         user_name,
         email,
+        target_dialect,
         story_ratings,
         status: "submitted",
         submitted_at: now,
@@ -152,12 +171,66 @@ export async function finalizeDialectEvaluation(
   );
 }
 
+/** Mark session complete when all per-story ratings are already in MongoDB. */
+export async function finalizeDialectEvaluationInDb(
+  db: Db,
+  email: string,
+  user_name: string,
+  target_dialect: TranslationDialect
+): Promise<string | null> {
+  const col = db.collection(DIALECT_EVAL_COLLECTION);
+  const existing = await col.findOne({ email });
+  const story_ratings = Array.isArray(existing?.story_ratings)
+    ? (existing.story_ratings as Record<string, unknown>[])
+    : [];
+
+  const validationError = validateAllStoriesPresent(story_ratings, target_dialect);
+  if (validationError) return validationError;
+
+  const now = new Date();
+  await col.updateOne(
+    { email },
+    {
+      $set: {
+        user_name,
+        email,
+        target_dialect,
+        status: "submitted",
+        submitted_at: now,
+        updated_at: now,
+      },
+      $setOnInsert: { created_at: now, story_ratings },
+    },
+    { upsert: true }
+  );
+  return null;
+}
+
+export function validateCaseForDialect(
+  caseId: string,
+  target_dialect: TranslationDialect
+): boolean {
+  return getDialectEvalCases(target_dialect).some((c) => c.case_id === caseId);
+}
+
 export function validateAllStoriesPresent(
-  ratings: Record<string, unknown>[]
+  ratings: Record<string, unknown>[],
+  target_dialect: TranslationDialect
 ): string | null {
+  const expected = getDialectEvalCases(target_dialect);
+  const expectedIds = new Set(expected.map((c) => c.case_id));
+
+  for (const r of ratings) {
+    if (!expectedIds.has(String(r.case_id))) {
+      return "One or more ratings do not belong to the selected dialect.";
+    }
+  }
+
   const caseIds = new Set(ratings.map((r) => r.case_id));
-  if (caseIds.size !== dialectEvalCases.length) {
-    return `Expected ratings for all ${dialectEvalCases.length} stories.`;
+  if (caseIds.size !== expected.length) {
+    return `Expected ratings for all ${expected.length} stories.`;
   }
   return null;
 }
+
+export { isDialect };

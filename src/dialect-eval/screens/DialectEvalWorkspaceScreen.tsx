@@ -1,11 +1,11 @@
 import { useState } from "react";
 import {
   countCompletedStories,
+  countSavedStories,
   isStoryScoresComplete,
   useDialectEval,
 } from "@/context/DialectEvalContext";
-import { DIALECT_EVAL_STORY_COUNT } from "@/data/dialectEvalCases";
-import { dialectEvalCases } from "@/data/dialectEvalCases";
+import { getDialectLabel } from "@/data/dialects";
 import {
   CONFIDENCE_LABEL,
   DF_INSTRUCTIONS,
@@ -18,37 +18,50 @@ import ScoreSelect from "@/dialect-eval/components/ScoreSelect";
 import type { DialectEvalStoryScores } from "@/types/dialectEval";
 
 export default function DialectEvalWorkspaceScreen() {
-  const { state, setStoryScores, saveStoryRating, submitDialectEvaluation } = useDialectEval();
-  const { scoresByCaseId, savedCaseIds, isSavingStory, isSubmitting, submissionError, storySaveError } =
+  const { state, cases, storyCount, setStoryScores, submitStoryRating, finishDialectEvaluation } =
+    useDialectEval();
+  const { scoresByCaseId, savedCaseIds, isSavingStory, isSubmitting, submissionError, storySaveError, selectedDialect } =
     state;
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const currentCase = dialectEvalCases[currentIndex];
-  const scores = scoresByCaseId[currentCase.case_id];
+  const safeIndex =
+    cases.length > 0 ? Math.min(Math.max(currentIndex, 0), cases.length - 1) : 0;
+  const currentCase = cases[safeIndex];
+  const scores = currentCase ? scoresByCaseId[currentCase.case_id] : undefined;
 
-  const completedCount = countCompletedStories(scoresByCaseId);
-  const canSubmit = completedCount >= DIALECT_EVAL_STORY_COUNT && !isSubmitting;
+  const completedCount = countCompletedStories(cases, scoresByCaseId);
+  const savedCount = countSavedStories(cases, savedCaseIds);
+  const canFinish = storyCount > 0 && savedCount >= storyCount && !isSubmitting;
   const storyComplete = scores && isStoryScoresComplete(scores);
-  const storySaved = Boolean(savedCaseIds[currentCase.case_id]);
+  const storySubmitted = currentCase ? Boolean(savedCaseIds[currentCase.case_id]) : false;
 
-  const handleSaveStory = async () => {
-    if (!storyComplete) return;
-    await saveStoryRating(currentCase.case_id);
+  const handleSubmitStory = async () => {
+    if (!storyComplete || !currentCase) return;
+    await submitStoryRating(currentCase.case_id);
   };
 
-  const handleNextStory = async () => {
-    if (storyComplete && !storySaved) {
-      const ok = await saveStoryRating(currentCase.case_id);
-      if (!ok) return;
+  const canGoToStory = (index: number) => {
+    if (index < 0 || index >= storyCount) return false;
+    for (let j = 0; j < index; j++) {
+      if (!savedCaseIds[cases[j].case_id]) return false;
     }
-    setCurrentIndex((i) => Math.min(i + 1, DIALECT_EVAL_STORY_COUNT - 1));
+    return true;
+  };
+
+  const goToStory = (index: number) => {
+    if (!canGoToStory(index)) return;
+    setCurrentIndex(index);
+  };
+
+  const handleNextStory = () => {
+    goToStory(safeIndex + 1);
   };
 
   const updateDo = (field: "descriptive_count" | "coaching_count" | "notes", value: number | string) => {
-    setStoryScores(currentCase.case_id, {
-      ...scores,
+    setStoryScores(activeCase.case_id, {
+      ...activeScores,
       descriptive_orientation: {
-        ...scores.descriptive_orientation,
+        ...activeScores.descriptive_orientation,
         [field]: value,
       },
     });
@@ -59,22 +72,31 @@ export default function DialectEvalWorkspaceScreen() {
     field: string,
     value: number | string
   ) => {
-    setStoryScores(currentCase.case_id, {
-      ...scores,
-      [key]: { ...scores[key], [field]: value },
+    setStoryScores(activeCase.case_id, {
+      ...activeScores,
+      [key]: { ...activeScores[key], [field]: value },
     });
   };
 
   const updateDf = (field: string, value: number | string) => {
-    setStoryScores(currentCase.case_id, {
-      ...scores,
-      dialect_fluency: { ...scores.dialect_fluency, [field]: value },
+    setStoryScores(activeCase.case_id, {
+      ...activeScores,
+      dialect_fluency: { ...activeScores.dialect_fluency, [field]: value },
     });
   };
 
-  if (!scores) return null;
+  if (!currentCase || !scores) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-neutral-100 p-8">
+        <p className="text-sm text-neutral-600">No stories loaded for your dialect.</p>
+      </div>
+    );
+  }
 
-  const doResult = scores.descriptive_orientation;
+  const activeCase = currentCase;
+  const activeScores = scores;
+
+  const doResult = activeScores.descriptive_orientation;
 
   return (
     <div className="flex min-h-screen flex-col bg-neutral-100 md:flex-row">
@@ -82,19 +104,23 @@ export default function DialectEvalWorkspaceScreen() {
         <div className="p-4">
           <p className="text-xs font-medium text-neutral-500">Stories</p>
           <p className="mt-1 text-xs text-neutral-500">
-            {completedCount} of {DIALECT_EVAL_STORY_COUNT} complete
+            {savedCount} of {storyCount} submitted to database
+          </p>
+          <p className="text-xs text-neutral-400">
+            {completedCount} of {storyCount} scored locally
           </p>
           <nav className="mt-3 max-h-48 overflow-y-auto md:max-h-[calc(100vh-10rem)]">
-            {dialectEvalCases.map((c, i) => {
+            {cases.map((c, i) => {
               const done = isStoryScoresComplete(scoresByCaseId[c.case_id]);
               const saved = Boolean(savedCaseIds[c.case_id]);
               return (
                 <button
                   key={c.case_id}
                   type="button"
-                  onClick={() => setCurrentIndex(i)}
-                  className={`w-full border-l-2 px-3 py-2 text-left text-sm transition-colors ${
-                    i === currentIndex
+                  onClick={() => goToStory(i)}
+                  disabled={!canGoToStory(i)}
+                  className={`w-full border-l-2 px-3 py-2 text-left text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+                    i === safeIndex
                       ? "border-neutral-900 bg-neutral-50 font-medium"
                       : done
                         ? "border-green-600/50 text-neutral-700"
@@ -103,7 +129,7 @@ export default function DialectEvalWorkspaceScreen() {
                 >
                   <span className="text-neutral-400">{i + 1}.</span> {c.english_title.slice(0, 22)}
                   {c.english_title.length > 22 ? "…" : ""}
-                  {saved ? <span className="ml-1 text-blue-700" title="Saved to database">✓</span> : null}
+                  {saved ? <span className="ml-1 text-blue-700" title="Submitted to database">✓</span> : null}
                 </button>
               );
             })}
@@ -112,29 +138,36 @@ export default function DialectEvalWorkspaceScreen() {
         <div className="mt-auto border-t border-neutral-200 p-4">
           <button
             type="button"
-            disabled={!canSubmit}
-            onClick={() => void submitDialectEvaluation()}
+            disabled={!canFinish}
+            onClick={() => void finishDialectEvaluation()}
             className="w-full rounded-md bg-neutral-900 py-2.5 text-sm font-medium text-white hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {isSubmitting ? "Submitting…" : "Submit all ratings"}
+            {isSubmitting ? "Finishing…" : "Finish evaluation"}
           </button>
-          {!canSubmit ? (
+          {!canFinish ? (
             <p className="mt-2 text-xs text-neutral-500">
-              Complete all {DIALECT_EVAL_STORY_COUNT} stories to submit.
+              Submit each story with &ldquo;Submit story&rdquo; ({savedCount}/{storyCount} in database).
             </p>
-          ) : null}
+          ) : (
+            <p className="mt-2 text-xs text-neutral-500">
+              All stories are in the database. Click to mark your session complete.
+            </p>
+          )}
         </div>
       </aside>
 
       <div className="flex min-h-0 flex-1 flex-col">
         <header className="border-b border-neutral-200 bg-white px-4 py-4">
           <p className="text-xs font-medium uppercase tracking-wide text-neutral-500">
-            Story {currentIndex + 1} of {DIALECT_EVAL_STORY_COUNT} · {currentCase.case_id}
+            Story {safeIndex + 1} of {storyCount} · ID {currentCase.story_id}
           </p>
           <h1 className="text-lg font-semibold text-neutral-900">{currentCase.english_title}</h1>
           <p className="mt-1 text-sm text-neutral-600">
-            Target dialect: <strong>{currentCase.target_dialect}</strong> · Base {currentCase.base_story_id}
+            Dialect: <strong>{selectedDialect ? getDialectLabel(selectedDialect) : currentCase.target_dialect}</strong>
+            {/* {" · "} */}
+            {/* {currentCase.model} · {currentCase.task.replace(/_/g, " ")} */}
           </p>
+          <p className="mt-1 text-sm text-neutral-600">The story is generated with AI, may include prefix or suffix. Only pay attantion to the story content for the evaluation.</p>
         </header>
 
         {submissionError || storySaveError ? (
@@ -149,7 +182,9 @@ export default function DialectEvalWorkspaceScreen() {
           {storyComplete ? (
             <p className="rounded-md border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-900">
               All four metrics are filled for this story.
-              {storySaved ? " Saved to database." : " Save or go to the next story to store your ratings."}
+              {storySubmitted
+                ? " Submitted to database. You can go to the next story."
+                : " Submit this story before moving to the next one."}
             </p>
           ) : null}
 
@@ -256,7 +291,7 @@ export default function DialectEvalWorkspaceScreen() {
             ))}
             <div>
               <label htmlFor="df-cons" className="text-sm text-neutral-700">
-                Consistency note (quote evidence)
+                Consistency note (optional, quote evidence)
               </label>
               <textarea
                 id="df-cons"
@@ -268,7 +303,7 @@ export default function DialectEvalWorkspaceScreen() {
             </div>
             <div>
               <label htmlFor="df-reg" className="text-sm text-neutral-700">
-                Regional appropriateness note (quote evidence)
+                Regional appropriateness note (optional, quote evidence)
               </label>
               <textarea
                 id="df-reg"
@@ -290,27 +325,34 @@ export default function DialectEvalWorkspaceScreen() {
           </section>
 
           <div className="flex flex-wrap items-center justify-between gap-3 border-t border-neutral-200 pt-4">
-            <button
+            {/* <button
               type="button"
-              disabled={currentIndex === 0}
-              onClick={() => setCurrentIndex((i) => i - 1)}
+              disabled={safeIndex === 0}
+              onClick={() => goToStory(safeIndex - 1)}
               className="rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm disabled:opacity-40"
             >
               Previous story
-            </button>
+            </button> */}
             <button
               type="button"
               disabled={!storyComplete || isSavingStory}
-              onClick={() => void handleSaveStory()}
+              onClick={() => void handleSubmitStory()}
               className="rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm disabled:opacity-40"
             >
-              {isSavingStory ? "Saving…" : storySaved ? "Saved" : "Save story"}
+              {isSavingStory ? "Submitting…" : storySubmitted ? "Submitted" : "Submit story"}
             </button>
             <button
               type="button"
-              disabled={currentIndex >= DIALECT_EVAL_STORY_COUNT - 1 || isSavingStory}
-              onClick={() => void handleNextStory()}
+              disabled={
+                safeIndex >= storyCount - 1 || isSavingStory || !canGoToStory(safeIndex + 1)
+              }
+              onClick={handleNextStory}
               className="rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm disabled:opacity-40"
+              title={
+                !canGoToStory(safeIndex + 1)
+                  ? "Submit this story before continuing"
+                  : undefined
+              }
             >
               Next story
             </button>
@@ -356,7 +398,7 @@ function DimensionSection({
       ))}
       <div>
         <label htmlFor={`${idPrefix}-rat`} className="text-sm text-neutral-700">
-          Rationale (2–4 sentences, include quote fragments)
+          Optional Rationale (2–4 sentences, include quote fragments)
         </label>
         <textarea
           id={`${idPrefix}-rat`}

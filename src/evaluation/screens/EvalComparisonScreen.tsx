@@ -3,9 +3,9 @@ import {
   EVALUATION_STORY_COUNT,
   useEvaluation,
 } from "@/context/EvaluationContext";
-import type { EvaluationComparisonResponse } from "@/types/evaluation";
 import RulesChecklistModal from "@/components/RulesChecklistModal";
 import { getDialectLabel } from "@/data/dialects";
+import type { EvaluationComparisonResponse } from "@/types/evaluation";
 import type { EvaluationStoryRound, EvaluationStoriesPayload } from "@/types/evaluation";
 
 function translationCardClass(

@@ -18,7 +18,7 @@ export default function DialectEvalSignupScreen() {
     }
     setError("");
     setUser({ name: name.trim(), email: email.trim() });
-    setPhase("intro");
+    setPhase("dialect");
   };
 
   return (
@@ -29,8 +29,9 @@ export default function DialectEvalSignupScreen() {
           Participant registration
         </h1>
         <p className="mb-8 text-sm leading-relaxed text-neutral-600">
-          You will rate six Arabic social stories using four metrics: descriptive orientation (DO),
-          structural clarity (SC), situational safety (SS), and dialect fluency (DF).
+          You will rate Arabic social stories for your assigned dialect using four metrics:
+          descriptive orientation (DO), structural clarity (SC), situational safety (SS), and
+          dialect fluency (DF).
         </p>
 
         <form
